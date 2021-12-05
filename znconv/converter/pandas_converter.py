@@ -1,7 +1,6 @@
 import pandas
 import io
 from znconv import ConverterBase
-import pytorch
 
 
 class PandasConverter(ConverterBase):
