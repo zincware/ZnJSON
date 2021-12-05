@@ -65,7 +65,7 @@ class ConverterBase(abc.ABC):
 
         """
 
-        if isinstance(obj, self.instance):
+        if self == obj:
             return {"_type": self.representation, "value": self._encode(obj)}
         else:
             raise NotImplementedError(f"{self.__class__} can't convert {type(obj)}")
