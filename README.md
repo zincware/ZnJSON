@@ -2,6 +2,8 @@
 
 Package to Encode/Decode some common file formats to json
 
+Available via ``pip install znconv``
+
 # Example
 
 ````python
