@@ -1,8 +1,7 @@
 import setuptools
 import pathlib
 
-long_description = pathlib.Path("README.rst").read_text()
-required_packages = pathlib.Path("requirements.txt").read_text().splitlines()
+long_description = pathlib.Path("README.md").read_text()
 
 setuptools.setup(
     name="znconv",
@@ -23,5 +22,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.7",
-    install_requires=required_packages,
+    install_requires=[],
 )
