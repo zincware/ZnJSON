@@ -6,7 +6,7 @@ from typing import Any
 class ZnEncoder(json.JSONEncoder):
     def default(self, o: Any) -> Any:
         for converter in config.ACTIVE_CONVERTER:
-            if isinstance(o, converter.instance):
+            if converter() == o:
                 return converter().encode(o)
         raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
 
@@ -22,7 +22,7 @@ class ZnDecoder(json.JSONDecoder):
             return obj
 
         for converter in config.ACTIVE_CONVERTER:
-            if instance == converter.representation:
+            if converter.representation == instance:
                 return converter().decode(obj)
         raise TypeError(f"Object of type {instance} could not be converted")
 

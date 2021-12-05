@@ -6,13 +6,13 @@ class ConverterBase(abc.ABC):
 
     Attributes
     ----------
-    instance: object
+    instance: type
         the type of the object to convert, e.g. np.ndarray or pathlib.Path
     representation: str
         the name of the object to convert. should e.g. be `pathlib.Path`
     """
 
-    instance: object = None
+    instance: type = None
     representation: str = None
 
     @abc.abstractmethod
@@ -92,3 +92,10 @@ class ConverterBase(abc.ABC):
             return self._decode(obj["value"])
         else:
             raise NotImplementedError(f"{self.__class__} can't convert {obj['_type']}")
+
+    def __eq__(self, other) -> bool:
+        """Check if the other object is equal to self.instance
+
+        Can be used for custom overwriting the __eq__ method
+        """
+        return isinstance(other, self.instance)
