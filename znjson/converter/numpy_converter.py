@@ -1,5 +1,5 @@
 import numpy as np
-from znconv import ConverterBase
+from znjson import ConverterBase
 import io
 
 

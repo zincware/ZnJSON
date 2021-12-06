@@ -9,16 +9,16 @@ def my_path():
 
 
 def test_encode(my_path):
-    import znconv
+    import znjson
 
-    znconv.register(znconv.converter.PathlibConverter)
-    _ = json.dumps(my_path, cls=znconv.ZnEncoder)
+    znjson.register(znjson.converter.PathlibConverter)
+    _ = json.dumps(my_path, cls=znjson.ZnEncoder)
     # raise NotImplementedError(json.dumps(my_path, cls=znconv.ZnEncoder))
 
 
 def test_decode(my_path):
-    import znconv
+    import znjson
 
     # znconv.register(znconv.converter.PathlibConverter)
-    encoded_str = json.dumps(my_path, cls=znconv.ZnEncoder)
-    assert json.loads(encoded_str, cls=znconv.ZnDecoder) == my_path
+    encoded_str = json.dumps(my_path, cls=znjson.ZnEncoder)
+    assert json.loads(encoded_str, cls=znjson.ZnDecoder) == my_path

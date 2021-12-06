@@ -1,5 +1,5 @@
 import pathlib
-from znconv import ConverterBase
+from znjson import ConverterBase
 
 
 class PathlibConverter(ConverterBase):

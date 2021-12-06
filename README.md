@@ -1,8 +1,8 @@
-# ZnConv
+# ZnJSON
 
 Package to Encode/Decode some common file formats to json
 
-Available via ``pip install znconv``
+Available via ``pip install znjson``
 
 In comparison to `pickle` this allows having readable json files combined with some serialized data.
 
@@ -11,12 +11,12 @@ In comparison to `pickle` this allows having readable json files combined with s
 ````python
 import numpy as np
 import json
-import znconv
+import znjson
 
-znconv.register(
-    znconv.converter.NumpyConverter
+znjson.register(
+    znjson.converter.NumpyConverter
 )
 
-data = json.dumps({"data": np.arange(9)}, cls=znconv.ZnEncoder)
-_ = json.loads(data, cls=znconv.ZnDecoder)
+data = json.dumps({"data": np.arange(9)}, cls=znjson.ZnEncoder)
+_ = json.loads(data, cls=znjson.ZnDecoder)
 ````

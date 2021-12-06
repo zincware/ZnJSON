@@ -2,9 +2,9 @@ import pandas as pd
 import pytest
 import json
 
-import znconv
+import znjson
 
-znconv.register(znconv.converter.PandasConverter)
+znjson.register(znjson.converter.PandasConverter)
 
 
 @pytest.fixture
@@ -13,9 +13,9 @@ def pandas_dataframe():
 
 
 def test_encode(pandas_dataframe):
-    _ = json.dumps(pandas_dataframe, cls=znconv.ZnEncoder)
+    _ = json.dumps(pandas_dataframe, cls=znjson.ZnEncoder)
 
 
 def test_decode(pandas_dataframe):
-    encoded_str = json.dumps(pandas_dataframe, cls=znconv.ZnEncoder)
-    pandas_dataframe.equals(json.loads(encoded_str, cls=znconv.ZnDecoder))
+    encoded_str = json.dumps(pandas_dataframe, cls=znjson.ZnEncoder)
+    pandas_dataframe.equals(json.loads(encoded_str, cls=znjson.ZnDecoder))

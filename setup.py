@@ -4,15 +4,15 @@ import pathlib
 long_description = pathlib.Path("README.md").read_text()
 
 setuptools.setup(
-    name="znconv",
-    version="0.0.2",
+    name="znjson",
+    version="0.0.3",
     author="zincwarecode",
     author_email="zincwarecode@gmail.com",
     description="A Python Package to Encode/Decode some common file formats to json",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/zincware/ZnConv",
-    download_url="https://github.com/zincware/ZnConv/archive/beta.tar.gz",
+    url="https://github.com/zincware/ZnJSON",
+    download_url="https://github.com/zincware/ZnJSON/archive/beta.tar.gz",
     keywords=["json", "zntrack"],
     packages=setuptools.find_packages(),
     classifiers=[

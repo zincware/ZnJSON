@@ -1,4 +1,4 @@
-from znconv.config import config
+from znjson.config import config
 import json
 from typing import Any
 
@@ -28,10 +28,10 @@ class ZnDecoder(json.JSONDecoder):
 
 
 if __name__ == "__main__":
-    import znconv
+    import znjson
     import numpy as np
 
-    znconv.register(znconv.converter.NumpyConverter)
+    znjson.register(znjson.converter.NumpyConverter)
 
     data = np.arange(10)
 

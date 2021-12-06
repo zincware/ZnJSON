@@ -1,6 +1,6 @@
 import pandas
 import io
-from znconv import ConverterBase
+from znjson import ConverterBase
 
 
 class PandasConverter(ConverterBase):
