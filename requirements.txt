@@ -1,3 +1,5 @@
 numpy
 pandas
 pytest
+coverage
+coveralls
