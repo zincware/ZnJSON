@@ -1,6 +1,7 @@
-import pytest
 import json
 import pathlib
+
+import pytest
 
 
 @pytest.fixture

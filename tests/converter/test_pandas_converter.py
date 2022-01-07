@@ -1,6 +1,7 @@
+import json
+
 import pandas as pd
 import pytest
-import json
 
 import znjson
 

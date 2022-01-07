@@ -1,6 +1,8 @@
-import numpy as np
-from znjson import ConverterBase
 import io
+
+import numpy as np
+
+from znjson import ConverterBase
 
 
 class NumpyConverter(ConverterBase):

@@ -1,7 +1,7 @@
 from .base import ConverterBase
-from .main import ZnEncoder, ZnDecoder
-from .config import register, config
+from .config import config, register
 from .converter import *
+from .main import ZnDecoder, ZnEncoder
 
 __all__ = ["ConverterBase", "ZnDecoder", "ZnEncoder", "register", "config"]
 

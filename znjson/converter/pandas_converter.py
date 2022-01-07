@@ -1,5 +1,7 @@
-import pandas
 import io
+
+import pandas
+
 from znjson import ConverterBase
 
 

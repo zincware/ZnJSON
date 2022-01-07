@@ -1,6 +1,7 @@
-from znjson.config import config
 import json
 from typing import Any
+
+from znjson.config import config
 
 
 class ZnEncoder(json.JSONEncoder):
@@ -28,8 +29,9 @@ class ZnDecoder(json.JSONDecoder):
 
 
 if __name__ == "__main__":
-    import znjson
     import numpy as np
+
+    import znjson
 
     znjson.register(znjson.converter.NumpyConverter)
 

@@ -1,5 +1,6 @@
-import setuptools
 import pathlib
+
+import setuptools
 
 long_description = pathlib.Path("README.md").read_text()
 

@@ -1,4 +1,5 @@
 import pathlib
+
 from znjson import ConverterBase
 
 

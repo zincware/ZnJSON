@@ -1,6 +1,7 @@
-from .base import ConverterBase
-from typing import List, Type, Union, Tuple
 from dataclasses import dataclass, field
+from typing import List, Tuple, Type, Union
+
+from .base import ConverterBase
 
 
 @dataclass()
@@ -12,9 +13,7 @@ config = Config()
 
 
 def register(
-    obj: Union[
-        List[Type[ConverterBase]], Tuple[Type[ConverterBase]], Type[ConverterBase]
-    ]
+    obj: Union[List[Type[ConverterBase]], Tuple[Type[ConverterBase]], Type[ConverterBase]]
 ):
     """register converters to be used with zn.En/DeCoder
 
