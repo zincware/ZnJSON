@@ -12,6 +12,7 @@ class HelloWorld:
     def __init__(self):
         self.name = "HelloWorld"
 
+
 @pytest.fixture
 def example_class():
     return HelloWorld()
