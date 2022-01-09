@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import abc
 
 
@@ -10,10 +12,15 @@ class ConverterBase(abc.ABC):
         the type of the object to convert, e.g. np.ndarray or pathlib.Path
     representation: str
         the name of the object to convert. should e.g. be `pathlib.Path`
+    order: int
+        The order in which the encoding should be applied. A higher number means this
+        is tried later. E.g. pickle should have a higher order using other serializers
+        first.
     """
 
     instance: type = None
     representation: str = None
+    order: int = 0
 
     @abc.abstractmethod
     def _encode(self, obj) -> str:
@@ -99,3 +106,6 @@ class ConverterBase(abc.ABC):
         Can be used for custom overwriting the __eq__ method
         """
         return isinstance(other, self.instance)
+
+    def __lt__(self, other: ConverterBase):
+        return self.order < other.order

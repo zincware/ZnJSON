@@ -1,4 +1,7 @@
-__all__ = []
+from .class_converter import ClassConverter
+from .pathlib_converter import PathlibConverter
+
+__all__ = ["PathlibConverter", "ClassConverter"]
 
 try:
     from .numpy_converter import NumpyConverter
@@ -6,12 +9,7 @@ try:
     __all__.append("NumpyConverter")
 except ModuleNotFoundError:
     pass
-try:
-    from .pathlib_converter import PathlibConverter
 
-    __all__.append("PathlibConverter")
-except ModuleNotFoundError:
-    pass
 try:
     from .pandas_converter import PandasConverter
 
