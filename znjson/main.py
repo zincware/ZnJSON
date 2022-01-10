@@ -6,6 +6,7 @@ from znjson.config import config
 
 class ZnEncoder(json.JSONEncoder):
     def default(self, o: Any) -> Any:
+        config.sort()
         for converter in config.ACTIVE_CONVERTER:
             if converter() == o:
                 return converter().encode(o)
@@ -21,7 +22,7 @@ class ZnDecoder(json.JSONDecoder):
             instance = obj["_type"]
         except KeyError:
             return obj
-
+        config.sort()
         for converter in config.ACTIVE_CONVERTER:
             if converter.representation == instance:
                 return converter().decode(obj)

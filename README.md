@@ -19,7 +19,7 @@ import json
 import znjson
 
 znjson.register(
-    znjson.converter.NumpyConverter
+    znjson.converter.SmallNumpyConverter
 )
 
 data = json.dumps(
@@ -34,20 +34,18 @@ The resulting ``*.json`` file is partially readable and looks like this:
 ````json
 {
     "data_np": {
-        "_type": "np.ndarray",
-        "value": "\u0093NUMPY\u0001\u0000v\u0000{'descr': '<i4', 'fortran_order': False, 'shape': (2,), }                                                            \n\u0000\u0000\u0000\u0000\u0001\u0000\u0000\u0000"
+        "_type": "np.ndarray_small",
+        "value": [
+            0,
+            1
+        ]
     },
     "data": [
         0,
         1,
         2,
         3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9
+        4
     ]
 }
 ````
