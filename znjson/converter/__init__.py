@@ -5,8 +5,9 @@ __all__ = ["PathlibConverter", "ClassConverter"]
 
 try:
     from .numpy_converter import NumpyConverter
+    from .small_numpy_converter import SmallNumpyConverter
 
-    __all__.append("NumpyConverter")
+    __all__ += ["NumpyConverter", "SmallNumpyConverter"]
 except ModuleNotFoundError:
     pass
 

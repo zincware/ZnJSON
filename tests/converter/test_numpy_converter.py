@@ -5,16 +5,18 @@ import pytest
 
 import znjson
 
-znjson.register(znjson.converter.NumpyConverter)
+znjson.register([znjson.converter.NumpyConverter, znjson.converter.SmallNumpyConverter])
 
 
 @pytest.fixture
 def numpy_array():
-    return np.arange(10)
+    return np.arange(100)
 
 
 def test_encode(numpy_array):
-    _ = json.dumps(numpy_array, cls=znjson.ZnEncoder)
+    arr = json.dumps(numpy_array, cls=znjson.ZnEncoder)
+    # check that the correct encoder is used
+    assert arr.startswith('{"_type": "np.ndarray"')
 
 
 def test_decode(numpy_array):
