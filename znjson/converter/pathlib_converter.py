@@ -5,7 +5,8 @@ from znjson import ConverterBase
 
 class PathlibConverter(ConverterBase):
     instance = pathlib.Path
-    representation = "pathlib.Path"
+    identifier = "pathlib.Path"
+    level = 10
 
     def _encode(self, obj: pathlib.Path):
         return obj.as_posix()

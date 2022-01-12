@@ -10,17 +10,17 @@ class ConverterBase(abc.ABC):
     ----------
     instance: type
         the type of the object to convert, e.g. np.ndarray or pathlib.Path
-    representation: str
+    identifier: str
         the name of the object to convert. should e.g. be `pathlib.Path`
-    order: int
-        The order in which the encoding should be applied. A higher number means this
-        is tried later. E.g. pickle should have a higher order using other serializers
+    level: int
+        The level in which the encoding should be applied. A higher number means it will
+        try this first. E.g. test small numpy conversion before pickle
         first.
     """
 
     instance: type = None
-    representation: str = None
-    order: int = 0
+    identifier: str = None
+    level: int = 0
 
     @abc.abstractmethod
     def _encode(self, obj) -> str:
@@ -68,12 +68,12 @@ class ConverterBase(abc.ABC):
         Returns
         -------
         dict:
-            A dictionary {_type: self.representation, value: serialized_obj}
+            A dictionary {_type: self.identifier, value: serialized_obj}
 
         """
 
         if self == obj:
-            return {"_type": self.representation, "value": self._encode(obj)}
+            return {"_type": self.identifier, "value": self._encode(obj)}
         else:
             raise NotImplementedError(f"{self.__class__} can't convert {type(obj)}")
 
@@ -83,7 +83,7 @@ class ConverterBase(abc.ABC):
         Parameters
         ----------
         obj: dict
-            A dictionary {_type: self.representation, value: serialized_obj}
+            A dictionary {_type: self.identifier, value: serialized_obj}
 
         Returns
         -------
@@ -95,7 +95,7 @@ class ConverterBase(abc.ABC):
             _ = obj["_type"]
         except KeyError:
             raise NotImplementedError(f"{self.__class__} can't convert without _type")
-        if obj["_type"] == self.representation:
+        if obj["_type"] == self.identifier:
             return self._decode(obj["value"])
         else:
             raise NotImplementedError(f"{self.__class__} can't convert {obj['_type']}")
@@ -108,4 +108,4 @@ class ConverterBase(abc.ABC):
         return isinstance(other, self.instance)
 
     def __lt__(self, other: ConverterBase):
-        return self.order < other.order
+        return self.level < other.level
