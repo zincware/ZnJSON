@@ -16,7 +16,7 @@ def numpy_array():
 def test_encode(numpy_array):
     arr = json.dumps(numpy_array, cls=znjson.ZnEncoder)
     # check that the correct encoder is used
-    assert arr.startswith('{"_type": "np.ndarray"')
+    assert arr.startswith('{"_type": "np.ndarray64"')
 
 
 def test_decode(numpy_array):

@@ -4,11 +4,11 @@ from .pathlib_converter import PathlibConverter
 __all__ = ["PathlibConverter", "ClassConverter"]
 
 try:
-    from .numpy_converter import NumpyConverter
-    from .numpy_converter_base64 import NumpyConverterBase64
-    from .small_numpy_converter import SmallNumpyConverter
+    from znjson.converter.numpy_converter_base64 import NumpyConverter
+    from znjson.converter.numpy_converter_latin1 import NumpyConverterLatin1
+    from znjson.converter.small_numpy_converter import SmallNumpyConverter
 
-    __all__ += ["SmallNumpyConverter", "NumpyConverterBase64"]
+    __all__ += ["SmallNumpyConverter", "NumpyConverter", "NumpyConverterLatin1"]
 except ModuleNotFoundError:
     pass
 

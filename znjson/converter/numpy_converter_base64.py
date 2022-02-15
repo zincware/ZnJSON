@@ -6,7 +6,7 @@ import numpy as np
 from znjson import ConverterBase
 
 
-class NumpyConverterBase64(ConverterBase):
+class NumpyConverter(ConverterBase):
     instance = np.ndarray
     representation = "np.ndarray64"
     order = 10
