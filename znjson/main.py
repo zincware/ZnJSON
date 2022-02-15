@@ -19,7 +19,9 @@ class ZnDecoder(json.JSONDecoder):
 
     def object_hook(self, obj):
         try:
+            # must have "_type" and "value" keys
             instance = obj["_type"]
+            _ = obj["value"]
         except KeyError:
             return obj
         config.sort()
