@@ -8,7 +8,7 @@ try:
     from .numpy_converter_base64 import NumpyConverterBase64
     from .small_numpy_converter import SmallNumpyConverter
 
-    __all__ += ["NumpyConverter", "SmallNumpyConverter", "NumpyConverterBase64"]
+    __all__ += ["SmallNumpyConverter", "NumpyConverterBase64"]
 except ModuleNotFoundError:
     pass
 
