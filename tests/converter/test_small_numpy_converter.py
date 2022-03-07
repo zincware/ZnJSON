@@ -5,16 +5,16 @@ import pytest
 
 import znjson
 
-znjson.register(znjson.converter.SmallNumpyConverter)
-
 
 @pytest.fixture
 def numpy_array():
+    znjson.register(znjson.converter.SmallNumpyConverter)
     return np.arange(10)
 
 
 @pytest.fixture
 def numpy_float_array():
+    znjson.register(znjson.converter.SmallNumpyConverter)
     return np.arange(10).astype(float)
 
 

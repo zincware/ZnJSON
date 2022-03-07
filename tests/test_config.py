@@ -26,10 +26,10 @@ def test_register_PathlibConverter_twice(deregister_all):
 
 def test_register_PathlibConverter_ClassConverter(deregister_all):
     znjson.register([znjson.converter.PathlibConverter, znjson.converter.ClassConverter])
-    assert znjson.config.ACTIVE_CONVERTER == [
+    assert set(znjson.config.ACTIVE_CONVERTER) == {
         znjson.converter.ClassConverter,
         znjson.converter.PathlibConverter,
-    ]
+    }
 
 
 def test_deregister_single(deregister_all):

@@ -20,13 +20,26 @@ config = Config()
 def register(
     obj: Union[
         List[Type[ConverterBase]], Tuple[Type[ConverterBase]], Type[ConverterBase]
-    ],
+    ] = None,
     /,
 ):
     """register converters to be used with zn.En/DeCoder
 
+    Attributes
+    ----------
+    obj:
+        If None, all available converters will be registered
+
     Updated the znconf.config which is used in the main converters
     """
+    if obj is None:
+        from znjson import converter
+
+        all_converters = [getattr(converter, name) for name in converter.__all__]
+        register(all_converters)
+        config.sort()
+        return
+
     if isinstance(obj, (list, tuple)):
         config.ACTIVE_CONVERTER += obj
     else:
