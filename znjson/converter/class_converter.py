@@ -23,7 +23,10 @@ class ClassConverter(ConverterBase):
             return pickle.load(f)
 
     def __eq__(self, other):
-        return self._import(other.__module__, other.__class__.__name__) is not False
+        try:
+            return self._import(other.__module__, other.__class__.__name__) is not False
+        except AttributeError:
+            return False
 
     @staticmethod
     def _import(module, name):

@@ -5,8 +5,6 @@ import pytest
 
 import znjson
 
-znjson.register(znjson.converter.PandasConverter)
-
 
 @pytest.fixture
 def pandas_dataframe():

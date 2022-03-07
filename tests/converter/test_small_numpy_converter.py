@@ -8,13 +8,11 @@ import znjson
 
 @pytest.fixture
 def numpy_array():
-    znjson.register(znjson.converter.SmallNumpyConverter)
     return np.arange(10)
 
 
 @pytest.fixture
 def numpy_float_array():
-    znjson.register(znjson.converter.SmallNumpyConverter)
     return np.arange(10).astype(float)
 
 

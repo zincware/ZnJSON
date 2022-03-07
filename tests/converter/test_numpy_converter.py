@@ -8,14 +8,6 @@ import znjson
 
 @pytest.fixture
 def numpy_array():
-    znjson.register(
-        [
-            znjson.converter.NumpyConverter,
-            znjson.converter.SmallNumpyConverter,
-            znjson.converter.NumpyConverterLatin1,
-        ]
-    )
-
     return np.arange(100)
 
 

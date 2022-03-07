@@ -5,8 +5,6 @@ import pytest
 
 import znjson
 
-znjson.register(znjson.PathlibConverter)
-
 
 @pytest.fixture
 def simple_dict():

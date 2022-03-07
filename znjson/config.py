@@ -10,8 +10,9 @@ class Config:
 
     def sort(self):
         """Sort the ACTIVE_CONVERTER by their order"""
-        sort = sorted([x() for x in self.ACTIVE_CONVERTER])
-        self.ACTIVE_CONVERTER = list({type(x) for x in sort})
+        active_converters = set(self.ACTIVE_CONVERTER)
+        sort = sorted([x() for x in active_converters])
+        self.ACTIVE_CONVERTER = [type(x) for x in sort]
 
 
 config = Config()
@@ -35,8 +36,7 @@ def register(
     if obj is None:
         from znjson import converter
 
-        all_converters = [getattr(converter, name) for name in converter.__all__]
-        register(all_converters)
+        [register(getattr(converter, name)) for name in converter.__all__]
         config.sort()
         return
 
