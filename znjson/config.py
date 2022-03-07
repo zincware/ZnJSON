@@ -22,7 +22,6 @@ def register(
     obj: Union[
         List[Type[ConverterBase]], Tuple[Type[ConverterBase]], Type[ConverterBase]
     ] = None,
-    /,
 ):
     """register converters to be used with zn.En/DeCoder
 
@@ -52,7 +51,6 @@ def deregister(
     obj: Union[
         List[Type[ConverterBase]], Tuple[Type[ConverterBase]], Type[ConverterBase]
     ],
-    /,
 ):
     """remove the given zn.En/DeCoder from the config"""
 
