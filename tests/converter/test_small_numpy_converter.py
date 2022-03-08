@@ -5,8 +5,6 @@ import pytest
 
 import znjson
 
-znjson.register([znjson.converter.SmallNumpyConverter, znjson.converter.NumpyConverter])
-
 
 @pytest.fixture
 def numpy_array():
@@ -30,7 +28,7 @@ def test_encode(numpy_array):
 
 def test_encode_large(numpy_array_large):
     arr = json.dumps(numpy_array_large, cls=znjson.ZnEncoder)
-    assert arr.startswith('{"_type": "np.ndarray"')
+    assert arr.startswith('{"_type": "np.ndarray64"')
 
 
 def test_encode_float(numpy_float_array):

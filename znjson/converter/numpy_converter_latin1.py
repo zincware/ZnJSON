@@ -5,10 +5,12 @@ import numpy as np
 from znjson import ConverterBase
 
 
-class NumpyConverter(ConverterBase):
+class NumpyConverterLatin1(ConverterBase):
+    """Do not use"""
+
     instance = np.ndarray
     identifier = "np.ndarray"
-    level = 10
+    level = 0
 
     def _encode(self, obj):
         with io.BytesIO() as f:

@@ -5,8 +5,6 @@ import pytest
 
 import znjson
 
-znjson.register([znjson.converter.NumpyConverter, znjson.converter.SmallNumpyConverter])
-
 
 @pytest.fixture
 def numpy_array():
@@ -14,13 +12,24 @@ def numpy_array():
 
 
 def test_encode(numpy_array):
-    arr = json.dumps(numpy_array, cls=znjson.ZnEncoder)
+    encoded_str = json.dumps(numpy_array, cls=znjson.ZnEncoder)
     # check that the correct encoder is used
-    assert arr.startswith('{"_type": "np.ndarray"')
+    assert encoded_str.startswith('{"_type": "np.ndarray64"')
 
 
 def test_decode(numpy_array):
     encoded_str = json.dumps(numpy_array, cls=znjson.ZnEncoder)
+    np.testing.assert_array_equal(
+        numpy_array, json.loads(encoded_str, cls=znjson.ZnDecoder)
+    )
+
+
+def test_decode_latin1(numpy_array):
+    znjson.deregister(znjson.converter.NumpyConverter)
+    encoded_str = json.dumps(numpy_array, cls=znjson.ZnEncoder)
+    # check that the correct encoder is used
+    assert encoded_str.startswith('{"_type": "np.ndarray"')
+    znjson.register(znjson.converter.NumpyConverter)
     np.testing.assert_array_equal(
         numpy_array, json.loads(encoded_str, cls=znjson.ZnDecoder)
     )
