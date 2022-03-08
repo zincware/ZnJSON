@@ -1,5 +1,5 @@
-from .class_converter import ClassConverter
-from .pathlib_converter import PathlibConverter
+from znjson.converter.class_converter import ClassConverter
+from znjson.converter.pathlib_converter import PathlibConverter
 
 __all__ = ["PathlibConverter", "ClassConverter"]
 
@@ -13,8 +13,8 @@ except ModuleNotFoundError:
     pass
 
 try:
-    from .pandas_converter import PandasConverter
+    from znjson.converter.pandas_converter import PandasConverter
 
-    __all__.append("PandasConverter")
+    __all__ += ["PandasConverter"]
 except ModuleNotFoundError:
     pass

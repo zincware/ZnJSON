@@ -5,8 +5,6 @@ import pytest
 
 import znjson
 
-znjson.register(znjson.converter.SmallNumpyConverter)
-
 
 @pytest.fixture
 def numpy_array():

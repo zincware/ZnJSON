@@ -6,7 +6,7 @@ long_description = pathlib.Path("README.md").read_text()
 
 setuptools.setup(
     name="znjson",
-    version="0.1.1",
+    version="0.1.0",
     author="zincwarecode",
     author_email="zincwarecode@gmail.com",
     description="A Python Package to Encode/Decode some common file formats to json",
@@ -19,7 +19,7 @@ setuptools.setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: Eclipse Public License 2.0 (EPL-2.0)",
+        "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.7",
