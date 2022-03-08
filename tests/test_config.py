@@ -11,28 +11,23 @@ def run_before_and_after_tests():
     znjson.register()
 
 
-def test_empty_converter():
-    assert znjson.config.ACTIVE_CONVERTER == []
+@pytest.mark.parametrize(
+    "converters",
+    (
+        [],
+        [znjson.converter.PathlibConverter],
+        [znjson.converter.PathlibConverter, znjson.converter.PathlibConverter],
+        [znjson.converter.PathlibConverter, znjson.converter.ClassConverter],
+    ),
+)
+def test_register(converters):
+    znjson.register(converters)
+    assert set(znjson.config.ACTIVE_CONVERTER) == set(converters)
 
 
 def test_register_PathlibConverter():
     znjson.register(znjson.converter.PathlibConverter)
     assert znjson.config.ACTIVE_CONVERTER == [znjson.converter.PathlibConverter]
-
-
-def test_register_PathlibConverter_twice():
-    znjson.register(
-        [znjson.converter.PathlibConverter, znjson.converter.PathlibConverter]
-    )
-    assert znjson.config.ACTIVE_CONVERTER == [znjson.converter.PathlibConverter]
-
-
-def test_register_PathlibConverter_ClassConverter():
-    znjson.register([znjson.converter.PathlibConverter, znjson.converter.ClassConverter])
-    assert set(znjson.config.ACTIVE_CONVERTER) == {
-        znjson.converter.ClassConverter,
-        znjson.converter.PathlibConverter,
-    }
 
 
 def test_deregister_single():
