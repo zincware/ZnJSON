@@ -42,7 +42,7 @@ def register(
     if isinstance(obj, (list, tuple)):
         config.ACTIVE_CONVERTER += obj
     else:
-        config.ACTIVE_CONVERTER.append(obj)
+        config.ACTIVE_CONVERTER += [obj]
 
     config.sort()
 
