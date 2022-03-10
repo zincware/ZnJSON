@@ -71,11 +71,7 @@ class ConverterBase(abc.ABC):
             A dictionary {_type: self.representation, value: serialized_obj}
 
         """
-
-        if self == obj:
-            return {"_type": self.representation, "value": self._encode(obj)}
-        else:
-            raise NotImplementedError(f"{self.__class__} can't convert {type(obj)}")
+        return {"_type": self.representation, "value": self._encode(obj)}
 
     def decode(self, obj: dict):
         """Convert parsed dict back to instance
@@ -91,14 +87,7 @@ class ConverterBase(abc.ABC):
             instance of self.instance
 
         """
-        try:
-            _ = obj["_type"]
-        except KeyError:
-            raise NotImplementedError(f"{self.__class__} can't convert without _type")
-        if obj["_type"] == self.representation:
-            return self._decode(obj["value"])
-        else:
-            raise NotImplementedError(f"{self.__class__} can't convert {obj['_type']}")
+        return self._decode(obj["value"])
 
     def __eq__(self, other) -> bool:
         """Check if the other object is equal to self.instance
