@@ -8,7 +8,7 @@ from znjson import ConverterBase
 class ClassConverter(ConverterBase):
     instance = object
     representation = "class"
-    order = 100
+    level = 0
 
     def _encode(self, obj):
         with io.BytesIO() as f:

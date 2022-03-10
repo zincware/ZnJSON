@@ -9,10 +9,13 @@ class Config:
     ACTIVE_CONVERTER: List[Type[ConverterBase]] = field(default_factory=list)
 
     def sort(self):
-        """Sort the ACTIVE_CONVERTER by their order"""
-        active_converters = set(self.ACTIVE_CONVERTER)
-        sort = sorted([x() for x in active_converters])
-        self.ACTIVE_CONVERTER = [type(x) for x in sort]
+        """Sort the ACTIVE_CONVERTER by their level
+
+        Start from high levels to low levels
+        """
+        active_converter = set(self.ACTIVE_CONVERTER)
+        active_converter = sorted([x() for x in active_converter], reverse=True)
+        self.ACTIVE_CONVERTER = [type(x) for x in active_converter]
 
 
 config = Config()
