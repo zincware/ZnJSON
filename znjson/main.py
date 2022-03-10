@@ -26,7 +26,7 @@ class ZnDecoder(json.JSONDecoder):
             return obj
         config.sort()
         for converter in config.ACTIVE_CONVERTER:
-            if converter.identifier == instance:
+            if converter.representation == instance:
                 return converter().decode(obj)
         raise TypeError(f"Object of type {instance} could not be converted")
 

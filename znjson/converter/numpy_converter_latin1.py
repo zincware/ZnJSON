@@ -9,7 +9,7 @@ class NumpyConverterLatin1(ConverterBase):
     """Do not use"""
 
     instance = np.ndarray
-    identifier = "np.ndarray"
+    representation = "np.ndarray"
     level = 0
 
     def _encode(self, obj):

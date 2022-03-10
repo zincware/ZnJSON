@@ -5,7 +5,7 @@ from znjson import ConverterBase
 
 class SmallNumpyConverter(ConverterBase):
     instance = np.ndarray
-    identifier = "np.ndarray_small"
+    representation = "np.ndarray_small"
     level = 50
 
     def _encode(self, obj):

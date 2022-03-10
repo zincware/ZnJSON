@@ -10,7 +10,7 @@ class ConverterBase(abc.ABC):
     ----------
     instance: type
         the type of the object to convert, e.g. np.ndarray or pathlib.Path
-    identifier: str
+    representation: str
         the name of the object to convert. should e.g. be `pathlib.Path`
     level: int
         The level in which the encoding should be applied. A higher number means it will
@@ -19,7 +19,7 @@ class ConverterBase(abc.ABC):
     """
 
     instance: type = None
-    identifier: str = None
+    representation: str = None
     level: int = 0
 
     @abc.abstractmethod
@@ -68,12 +68,12 @@ class ConverterBase(abc.ABC):
         Returns
         -------
         dict:
-            A dictionary {_type: self.identifier, value: serialized_obj}
+            A dictionary {_type: self.representation, value: serialized_obj}
 
         """
 
         if self == obj:
-            return {"_type": self.identifier, "value": self._encode(obj)}
+            return {"_type": self.representation, "value": self._encode(obj)}
         else:
             raise NotImplementedError(f"{self.__class__} can't convert {type(obj)}")
 
@@ -83,7 +83,7 @@ class ConverterBase(abc.ABC):
         Parameters
         ----------
         obj: dict
-            A dictionary {_type: self.identifier, value: serialized_obj}
+            A dictionary {_type: self.representation, value: serialized_obj}
 
         Returns
         -------
@@ -95,7 +95,7 @@ class ConverterBase(abc.ABC):
             _ = obj["_type"]
         except KeyError:
             raise NotImplementedError(f"{self.__class__} can't convert without _type")
-        if obj["_type"] == self.identifier:
+        if obj["_type"] == self.representation:
             return self._decode(obj["value"])
         else:
             raise NotImplementedError(f"{self.__class__} can't convert {obj['_type']}")

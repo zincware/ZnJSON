@@ -8,7 +8,7 @@ from znjson import ConverterBase
 
 class NumpyConverter(ConverterBase):
     instance = np.ndarray
-    identifier = "np.ndarray64"
+    representation = "np.ndarray64"
     level = 30
 
     def _encode(self, obj):

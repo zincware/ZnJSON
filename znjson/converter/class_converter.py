@@ -7,7 +7,7 @@ from znjson import ConverterBase
 
 class ClassConverter(ConverterBase):
     instance = object
-    identifier = "class"
+    representation = "class"
     level = 0
 
     def _encode(self, obj):
