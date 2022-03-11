@@ -14,7 +14,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/zincware/ZnJSON",
     download_url="https://github.com/zincware/ZnJSON/archive/beta.tar.gz",
-    keywords=["json", "zntrack"],
+    keywords=["json", "zntrack", "jsonpickle", "serialization", "deserialization"],
     packages=setuptools.find_packages(),
     classifiers=[
         "Development Status :: 3 - Alpha",
