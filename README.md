@@ -18,10 +18,6 @@ import numpy as np
 import json
 import znjson
 
-znjson.register(
-    znjson.converter.SmallNumpyConverter
-)
-
 data = json.dumps(
     obj={"data_np": np.arange(2), "data": [x for x in range(10)]},
     cls=znjson.ZnEncoder,
