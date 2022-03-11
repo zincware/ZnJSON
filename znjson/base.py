@@ -75,7 +75,7 @@ class ConverterBase(abc.ABC):
         if self == obj:
             return {"_type": self.representation, "value": self._encode(obj)}
         else:
-            raise NotImplementedError(f"{self.__class__} can't convert {type(obj)}")
+            raise TypeError(f"{self.__class__} can't convert {type(obj)}")
 
     def decode(self, obj: dict):
         """Convert parsed dict back to instance
@@ -94,11 +94,11 @@ class ConverterBase(abc.ABC):
         try:
             _ = obj["_type"]
         except KeyError:
-            raise NotImplementedError(f"{self.__class__} can't convert without _type")
+            raise TypeError(f"{self.__class__} can't convert without _type")
         if obj["_type"] == self.representation:
             return self._decode(obj["value"])
         else:
-            raise NotImplementedError(f"{self.__class__} can't convert {obj['_type']}")
+            raise TypeError(f"{self.__class__} can't convert {obj['_type']}")
 
     def __eq__(self, other) -> bool:
         """Check if the other object is equal to self.instance

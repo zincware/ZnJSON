@@ -49,3 +49,55 @@ The resulting ``*.json`` file is partially readable and looks like this:
     ]
 }
 ````
+
+# Custom Converter
+
+ZnJSON allows you to easily add custom converters.
+Let's write a serializer for ``datetime.datetime``. 
+
+````python
+from znjson import ConverterBase
+from datetime import datetime
+
+class DatetimeConverter(ConverterBase):
+    """Encode/Decode datetime objects
+
+    Attributes
+    ----------
+    level: int
+        Priority of this converter over others.
+        A higher level will be used first, if there
+        are multiple converters available
+    representation: str
+        An unique identifier for this converter.
+    instance:
+        Used to select the correct converter.
+        This should fulfill isinstance(other, self.instance)
+        or __eq__ should be overwritten.
+    """
+    level = 100
+    representation = "datetime"
+    instance = datetime
+
+    def _encode(self, obj: datetime) -> str:
+        """Convert the datetime object to str / isoformat"""
+        return obj.isoformat()
+    def _decode(self, value: str) -> datetime:
+        """Create datetime object from str / isoformat"""
+        return datetime.fromisoformat(value)
+````
+
+This allows us to use this new serializer:
+````python
+znjson.register(DatetimeConverter) # we need to register the new converter first
+json_string = json.dumps(dt, cls=znjson.ZnEncoder, indent=4)
+json.loads(json_string, cls=znjson.ZnDecoder)
+````
+
+and will result in
+````json
+{
+    "_type": "datetime",
+    "value": "2022-03-11T09:47:35.280331"
+}
+````
