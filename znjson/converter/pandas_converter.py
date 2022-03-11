@@ -8,6 +8,7 @@ from znjson import ConverterBase
 class PandasConverter(ConverterBase):
     instance = pandas.DataFrame
     representation = "pandas.DataFrame"
+    level = 10
 
     def _encode(self, obj: pandas.DataFrame):
         with io.BytesIO() as f:

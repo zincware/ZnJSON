@@ -12,15 +12,15 @@ class ConverterBase(abc.ABC):
         the type of the object to convert, e.g. np.ndarray or pathlib.Path
     representation: str
         the name of the object to convert. should e.g. be `pathlib.Path`
-    order: int
-        The order in which the encoding should be applied. A higher number means this
-        is tried later. E.g. pickle should have a higher order using other serializers
+    level: int
+        The level in which the encoding should be applied. A higher number means it will
+        try this first. E.g. test small numpy conversion before pickle
         first.
     """
 
     instance: type = None
     representation: str = None
-    order: int = 0
+    level: int = 0
 
     @abc.abstractmethod
     def _encode(self, obj) -> str:
@@ -71,11 +71,7 @@ class ConverterBase(abc.ABC):
             A dictionary {_type: self.representation, value: serialized_obj}
 
         """
-
-        if self == obj:
-            return {"_type": self.representation, "value": self._encode(obj)}
-        else:
-            raise TypeError(f"{self.__class__} can't convert {type(obj)}")
+        return {"_type": self.representation, "value": self._encode(obj)}
 
     def decode(self, obj: dict):
         """Convert parsed dict back to instance
@@ -91,14 +87,7 @@ class ConverterBase(abc.ABC):
             instance of self.instance
 
         """
-        try:
-            _ = obj["_type"]
-        except KeyError:
-            raise TypeError(f"{self.__class__} can't convert without _type")
-        if obj["_type"] == self.representation:
-            return self._decode(obj["value"])
-        else:
-            raise TypeError(f"{self.__class__} can't convert {obj['_type']}")
+        return self._decode(obj["value"])
 
     def __eq__(self, other) -> bool:
         """Check if the other object is equal to self.instance
@@ -108,4 +97,4 @@ class ConverterBase(abc.ABC):
         return isinstance(other, self.instance)
 
     def __lt__(self, other: ConverterBase):
-        return self.order < other.order
+        return self.level < other.level

@@ -37,3 +37,17 @@ def test_decode_pathlib_wo_value():
     data_str = '{"_type": "pathlib.Path"}'
 
     assert json.loads(data_str, cls=znjson.ZnDecoder) == {"_type": "pathlib.Path"}
+
+
+def test_not_encodeable():
+    function = lambda x: x
+
+    with pytest.raises(TypeError):
+        json.dumps(function, cls=znjson.ZnEncoder)
+
+
+def test_not_decodeable():
+    data_str = '{"_type": "unknown", "value": ""}'
+
+    with pytest.raises(TypeError):
+        json.loads(data_str, cls=znjson.ZnDecoder)

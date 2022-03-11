@@ -10,7 +10,7 @@ class NumpyConverterLatin1(ConverterBase):
 
     instance = np.ndarray
     representation = "np.ndarray"
-    order = 999
+    level = 0
 
     def _encode(self, obj):
         with io.BytesIO() as f:
