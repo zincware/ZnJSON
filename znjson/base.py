@@ -20,7 +20,7 @@ class ConverterBase(abc.ABC):
 
     instance: type = None
     representation: str = None
-    level: int = 0
+    level: int = 10
 
     @abc.abstractmethod
     def _encode(self, obj) -> str:
