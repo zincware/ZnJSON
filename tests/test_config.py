@@ -17,10 +17,10 @@ class NumberConverterA(ConverterBase):
     representation = "int"
     level = 100
 
-    def _encode(self, obj: int) -> str:
+    def encode(self, obj: int) -> str:
         return str(obj)
 
-    def _decode(self, value: str) -> int:
+    def decode(self, value: str) -> int:
         return int(value)
 
 

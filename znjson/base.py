@@ -23,7 +23,7 @@ class ConverterBase(abc.ABC):
     level: int = 10
 
     @abc.abstractmethod
-    def _encode(self, obj) -> str:
+    def encode(self, obj) -> str:
         """Convert obj to a serializable str
 
         Serialize the given object
@@ -42,7 +42,7 @@ class ConverterBase(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def _decode(self, value: str):
+    def decode(self, value: str):
         """Convert dict to instance of self.instance
 
         Parameters
@@ -58,7 +58,7 @@ class ConverterBase(abc.ABC):
         """
         raise NotImplementedError
 
-    def encode(self, obj) -> dict:
+    def encode_obj(self, obj) -> dict:
         """Convert obj to a serializable dict
 
         Parameters
@@ -71,9 +71,9 @@ class ConverterBase(abc.ABC):
             A dictionary {_type: self.representation, value: serialized_obj}
 
         """
-        return {"_type": self.representation, "value": self._encode(obj)}
+        return {"_type": self.representation, "value": self.encode(obj)}
 
-    def decode(self, obj: dict):
+    def decode_obj(self, obj: dict):
         """Convert parsed dict back to instance
 
         Parameters
@@ -87,7 +87,7 @@ class ConverterBase(abc.ABC):
             instance of self.instance
 
         """
-        return self._decode(obj["value"])
+        return self.decode(obj["value"])
 
     def __eq__(self, other) -> bool:
         """Check if the other object is equal to self.instance

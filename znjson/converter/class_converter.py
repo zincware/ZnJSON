@@ -10,13 +10,13 @@ class ClassConverter(ConverterBase):
     representation = "class"
     level = 0
 
-    def _encode(self, obj):
+    def encode(self, obj):
         with io.BytesIO() as f:
             pickle.dump(obj, file=f)
             f.seek(0)
             return f.read().decode("latin-1")
 
-    def _decode(self, value):
+    def decode(self, value):
         with io.BytesIO() as f:
             f.write(value.encode("latin-1"))
             f.seek(0)

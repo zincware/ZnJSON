@@ -8,8 +8,8 @@ class PathlibConverter(ConverterBase):
     representation = "pathlib.Path"
     level = 10
 
-    def _encode(self, obj: pathlib.Path):
+    def encode(self, obj: pathlib.Path):
         return obj.as_posix()
 
-    def _decode(self, value):
+    def decode(self, value):
         return pathlib.Path(value)

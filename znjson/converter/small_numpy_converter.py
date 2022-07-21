@@ -8,10 +8,10 @@ class SmallNumpyConverter(ConverterBase):
     representation = "np.ndarray_small"
     level = 50
 
-    def _encode(self, obj):
+    def encode(self, obj):
         return obj.tolist()
 
-    def _decode(self, value):
+    def decode(self, value):
         return np.array(value)
 
     def __eq__(self, other):

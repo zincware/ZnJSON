@@ -10,13 +10,13 @@ class PandasConverter(ConverterBase):
     representation = "pandas.DataFrame"
     level = 10
 
-    def _encode(self, obj: pandas.DataFrame):
+    def encode(self, obj: pandas.DataFrame):
         with io.BytesIO() as f:
             obj.to_pickle(f)
             f.seek(0)
             return f.read().decode("latin-1")
 
-    def _decode(self, value):
+    def decode(self, value):
         with io.BytesIO() as f:
             f.write(value.encode("latin-1"))
             f.seek(0)

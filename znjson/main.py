@@ -9,7 +9,7 @@ class ZnEncoder(json.JSONEncoder):
         config.sort()
         for converter in config.ACTIVE_CONVERTER:
             if converter() == o:
-                return converter().encode(o)
+                return converter().encode_obj(o)
         raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
 
 
@@ -17,7 +17,8 @@ class ZnDecoder(json.JSONDecoder):
     def __init__(self):
         super().__init__(object_hook=self.object_hook)
 
-    def object_hook(self, obj):
+    @staticmethod
+    def object_hook(obj):
         try:
             # must have "_type" and "value" keys
             instance = obj["_type"]
@@ -27,7 +28,7 @@ class ZnDecoder(json.JSONDecoder):
         config.sort()
         for converter in config.ACTIVE_CONVERTER:
             if converter.representation == instance:
-                return converter().decode(obj)
+                return converter().decode_obj(obj)
         raise TypeError(f"Object of type {instance} could not be converted")
 
 

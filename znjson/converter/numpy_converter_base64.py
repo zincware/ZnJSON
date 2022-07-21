@@ -11,13 +11,13 @@ class NumpyConverter(ConverterBase):
     representation = "np.ndarray64"
     level = 30
 
-    def _encode(self, obj):
+    def encode(self, obj):
         with io.BytesIO() as f:
             np.save(f, obj)
             f.seek(0)
             return base64.b64encode(f.read()).decode("ascii")
 
-    def _decode(self, value):
+    def decode(self, value):
         with io.BytesIO() as f:
             f.write(base64.b64decode(value))
             f.seek(0)
