@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List, Tuple, Type, Union
 
+from znjson import exceptions
 from znjson.base import ConverterBase
 
 
@@ -36,6 +37,7 @@ def register(
     Updated the znconf.config which is used in the main converters
     """
     if obj is None:
+        # register all default converters
         from znjson import converter
 
         [register(getattr(converter, name)) for name in converter.__all__]
@@ -43,6 +45,12 @@ def register(
         return
 
     if isinstance(obj, (list, tuple)):
+        obj = set(obj)  # remove true duplicates
+        if len({x.representation for x in obj}) != len(obj):
+            raise exceptions.NonUniqueRepresentation(
+                "Can not register multiple converters with the same representation"
+                " string."
+            )
         config.ACTIVE_CONVERTER += obj
     else:
         config.ACTIVE_CONVERTER += [obj]

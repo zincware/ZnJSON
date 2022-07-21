@@ -1,6 +1,7 @@
 import pytest
 
 import znjson.converter
+from znjson import ConverterBase, exceptions
 
 
 @pytest.fixture(autouse=True)
@@ -9,6 +10,24 @@ def run_before_and_after_tests():
     znjson.deregister(znjson.config.ACTIVE_CONVERTER)
     yield  # this is where the testing happens
     znjson.register()
+
+
+class NumberConverterA(ConverterBase):
+    instance = int
+    representation = "int"
+    level = 100
+
+    def _encode(self, obj: int) -> str:
+        return str(obj)
+
+    def _decode(self, value: str) -> int:
+        return int(value)
+
+
+class NumberConverterB(NumberConverterA):
+    """Different converter to A with the same representation string"""
+
+    pass
 
 
 @pytest.mark.parametrize(
@@ -46,3 +65,8 @@ def test_deregister_multiple():
     )
 
     assert znjson.config.ACTIVE_CONVERTER == []
+
+
+def test_register_non_unique():
+    with pytest.raises(exceptions.NonUniqueRepresentation):
+        znjson.register([NumberConverterA, NumberConverterB])

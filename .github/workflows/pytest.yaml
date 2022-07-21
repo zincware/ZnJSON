@@ -6,6 +6,8 @@ name: pytest
 on:
   push:
   pull_request:
+  schedule:
+    - cron: '14 3 * * 1'  # at 03:14 on Monday.
 
 jobs:
   build:
@@ -18,10 +20,9 @@ jobs:
           - "3.10"
           - 3.9
           - 3.8
-          - 3.7
         os:
           - ubuntu-latest
-          - windows-latest
+#          - windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -29,17 +30,23 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install requirements
-        run: |
-          pip3 install -r requirements.txt
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
       - name: Install package
         run: |
-          pip3 install .
+          poetry install --no-interaction
       - name: Pytest
         run: |
+          source .venv/bin/activate
           coverage run -m pytest
+          coverage xml
+          coverage lcov
       - name: Coveralls
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-        run: |
-          coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: coverage.lcov
