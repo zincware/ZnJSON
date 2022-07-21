@@ -19,7 +19,7 @@ readme = "README.md"
 repository = "https://github.com/zincware/ZnJSON"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 
 [tool.poetry.dev-dependencies]
 numpy = "^1.23.1"
