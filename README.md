@@ -1,6 +1,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/zincware/ZnJSON/badge.svg?branch=main)](https://coveralls.io/github/zincware/ZnJSON?branch=main)
 [![Code Style](https://img.shields.io/badge/code%20style-black-black)](https://github.com/psf/black/)
 [![Tests](https://github.com/zincware/ZnJSON/actions/workflows/pytest.yaml/badge.svg)](https://coveralls.io/github/zincware/ZnJSON?branch=main)
+[![PyPI version](https://badge.fury.io/py/znjson.svg)](https://badge.fury.io/py/znjson)
+
 
 # ZnJSON
 

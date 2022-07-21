@@ -5,3 +5,30 @@ preview = true
 [tool.isort]
 profile = 'black'
 multi_line_output = 3
+
+[tool.poetry]
+name = "znjson"
+version = "0.1.3"
+description = "A Python Package to Encode/Decode some common file formats to json"
+authors = ["zincwarecode <zincwarecode@gmail.com>"]
+license = "Apache-2.0"
+keywords=["json", "zntrack", "jsonpickle", "serialization", "deserialization"]
+readme = "README.md"
+
+[tool.poetry.urls]
+repository = "https://github.com/zincware/ZnJSON"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+numpy = "^1.23.1"
+pandas = "^1.4.3"
+pytest = "^7.1.2"
+coverage = "^6.4.2"
+coveralls = "^3.3.1"
+pytest-xdist = "^2.5.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
