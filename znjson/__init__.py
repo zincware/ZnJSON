@@ -1,3 +1,7 @@
+"""The ZnJSON serializing module
+
+https://github.com/zincware/ZnJSON
+"""
 from znjson.base import ConverterBase
 from znjson.config import config, deregister, register
 from znjson.converter import *

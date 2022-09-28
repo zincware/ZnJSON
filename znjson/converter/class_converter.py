@@ -1,3 +1,4 @@
+"""Use pickle to serialize arbitrary classes"""
 import importlib
 import io
 import pickle

@@ -1,3 +1,4 @@
+"""Pickle Pandas DataFrames"""
 import io
 
 import pandas

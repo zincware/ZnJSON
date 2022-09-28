@@ -1,3 +1,4 @@
+"""Store pathlib as posix"""
 import pathlib
 
 from znjson import ConverterBase

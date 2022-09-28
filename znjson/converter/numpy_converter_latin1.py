@@ -1,3 +1,4 @@
+"""Depreciated numpy converter"""
 import io
 
 import numpy as np

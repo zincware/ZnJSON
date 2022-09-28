@@ -1,3 +1,4 @@
+"""ZnJSON global configuration file"""
 from dataclasses import dataclass, field
 from typing import List, Tuple, Type, Union
 

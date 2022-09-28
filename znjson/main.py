@@ -1,3 +1,4 @@
+"""ZnJSON main Encoder / Decoder classes to use with the default json library"""
 import json
 from typing import Any
 

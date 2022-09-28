@@ -1,3 +1,4 @@
+"""Use base64 encoding to ASCII for large numpy arrays"""
 import base64
 import io
 
