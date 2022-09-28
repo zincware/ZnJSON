@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
     import znjson
 
-    znjson.register(znjson.converter.NumpyConverter)
+    znjson.config.register(znjson.converter.NumpyConverter)
 
     data = np.arange(10)
 

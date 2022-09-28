@@ -1,16 +1,21 @@
 """ZnJSON global configuration file"""
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from typing import List, Tuple, Type, Union
 
-from znjson import converter, exceptions
+from znjson import converter
 from znjson.base import ConverterBase
+from znjson.exceptions import NonUniqueRepresentation
 
 
 @dataclass()
 class Config:
     """ZnJSON global config object"""
 
-    ACTIVE_CONVERTER: List[Type[ConverterBase]] = field(default_factory=list)
+    ACTIVE_CONVERTER: List[Type[ConverterBase]] = field(  # pylint: disable=C0103
+        default_factory=list
+    )
 
     def sort(self):
         """Sort the ACTIVE_CONVERTER by their level
@@ -46,7 +51,7 @@ class Config:
         if isinstance(obj, (list, tuple)):
             obj = set(obj)  # remove true duplicates
             if len({x.representation for x in obj}) != len(obj):
-                raise exceptions.NonUniqueRepresentation(
+                raise NonUniqueRepresentation(
                     "Can not register multiple converters with the same representation"
                     " string."
                 )
