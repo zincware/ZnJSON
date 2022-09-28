@@ -10,7 +10,7 @@ class NumpyConverter(ConverterBase):
     """Use base64 encoding to ASCII for large numpy arrays"""
 
     instance = np.ndarray
-    representation = "np.ndarray64"
+    representation = "np.ndarray_b64"
     level = 30
 
     def encode(self, obj):

@@ -6,8 +6,8 @@ __all__ = ["PathlibConverter", "ClassConverter"]
 
 try:
     from znjson.converter.numpy_converter_base64 import NumpyConverter
-    from znjson.converter.small_numpy_converter import SmallNumpyConverter
+    from znjson.converter.numpy_converter_small import NumpyConverterSmall
 
-    __all__ += ["SmallNumpyConverter", "NumpyConverter"]
+    __all__ += ["NumpyConverterSmall", "NumpyConverter"]
 except ModuleNotFoundError:
     pass

@@ -28,7 +28,7 @@ def test_encode(numpy_array):
 
 def test_encode_large(numpy_array_large):
     arr = json.dumps(numpy_array_large, cls=znjson.ZnEncoder)
-    assert arr.startswith('{"_type": "np.ndarray64"')
+    assert arr.startswith('{"_type": "np.ndarray_b64"')
 
 
 def test_encode_float(numpy_float_array):
