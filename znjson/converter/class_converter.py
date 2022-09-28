@@ -1,27 +1,23 @@
 """Use pickle to serialize arbitrary classes"""
+import functools
 import importlib
-import io
 import pickle
 
 from znjson import ConverterBase
 
 
 class ClassConverter(ConverterBase):
+    """Converter using pickle to serialize arbitrary classes"""
+
     instance = object
     representation = "class"
     level = 0
 
     def encode(self, obj):
-        with io.BytesIO() as f:
-            pickle.dump(obj, file=f)
-            f.seek(0)
-            return f.read().decode("latin-1")
+        return self.save_to_b64(method=functools.partial(pickle.dump, obj))
 
     def decode(self, value):
-        with io.BytesIO() as f:
-            f.write(value.encode("latin-1"))
-            f.seek(0)
-            return pickle.load(f)
+        return self.load_from_b64(value, pickle.load)
 
     def __eq__(self, other):
         try:

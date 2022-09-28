@@ -17,7 +17,7 @@ def path_list():
 def test_encode(my_path):
     import znjson
 
-    znjson.register(znjson.converter.PathlibConverter)
+    znjson.config.register(znjson.converter.PathlibConverter)
     _ = json.dumps(my_path, cls=znjson.ZnEncoder)
     # raise NotImplementedError(json.dumps(my_path, cls=znconv.ZnEncoder))
 
@@ -33,7 +33,7 @@ def test_decode(my_path):
 def test_encode_lst(path_list):
     import znjson
 
-    znjson.register(znjson.converter.PathlibConverter)
+    znjson.config.register(znjson.converter.PathlibConverter)
     _ = json.dumps(path_list, cls=znjson.ZnEncoder)
 
 

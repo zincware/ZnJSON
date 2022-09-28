@@ -5,6 +5,8 @@ from znjson import ConverterBase
 
 
 class PathlibConverter(ConverterBase):
+    """Store pathlib as posix"""
+
     instance = pathlib.Path
     representation = "pathlib.Path"
     level = 10

@@ -5,6 +5,8 @@ from znjson import ConverterBase
 
 
 class SmallNumpyConverter(ConverterBase):
+    """Convert small numpy arrays to lists"""
+
     instance = np.ndarray
     representation = "np.ndarray_small"
     level = 50

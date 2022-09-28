@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import abc
+import base64
+import io
 
 
 class ConverterBase(abc.ABC):
@@ -19,8 +21,8 @@ class ConverterBase(abc.ABC):
         first.
     """
 
-    instance: type = None
-    representation: str = None
+    instance: type
+    representation: str
     level: int = 10
 
     @abc.abstractmethod
@@ -99,3 +101,19 @@ class ConverterBase(abc.ABC):
 
     def __lt__(self, other: ConverterBase):
         return self.level < other.level
+
+    @staticmethod
+    def save_to_b64(method):
+        """Use the method, e.g. np.save into memory and then return as ascii string"""
+        with io.BytesIO() as file:
+            method(file)
+            file.seek(0)
+            return base64.b64encode(file.read()).decode("ascii")
+
+    @staticmethod
+    def load_from_b64(value, method):
+        """Convert a string from memory into something that can be read e.g. by np.load"""
+        with io.BytesIO() as file:
+            file.write(base64.b64decode(value))
+            file.seek(0)
+            return method(file)
