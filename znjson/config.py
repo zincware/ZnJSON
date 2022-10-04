@@ -1,12 +1,15 @@
 """ZnJSON global configuration file"""
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass, field
 from typing import List, Tuple, Type, Union
 
 from znjson import converter
 from znjson.base import ConverterBase
 from znjson.exceptions import NonUniqueRepresentation
+
+log = logging.getLogger(__name__)
 
 
 @dataclass()
@@ -16,6 +19,7 @@ class Config:
     ACTIVE_CONVERTER: List[Type[ConverterBase]] = field(  # pylint: disable=C0103
         default_factory=list
     )
+    log_level: int = logging.WARNING
 
     def sort(self):
         """Sort the ACTIVE_CONVERTER by their level
@@ -78,3 +82,19 @@ class Config:
 
 
 config = Config()
+
+
+def register(obj=None):
+    """Depreciated register method"""
+    log.warning(
+        "DEPRECATED: 'register()' is deprecated, use 'config.register()' instead."
+    )
+    config.register(obj)
+
+
+def deregister(obj):
+    """Depreciated deregister method"""
+    log.warning(
+        "DEPRECATED: 'deregister()' is deprecated, use 'config.deregister()' instead."
+    )
+    config.deregister(obj)

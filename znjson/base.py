@@ -3,7 +3,25 @@ from __future__ import annotations
 
 import abc
 import base64
+import functools
 import io
+import logging
+
+log = logging.getLogger(__name__)
+
+
+def _depreciate_decorator(func, old: str, new: str):
+    """Wrap the function with a depreciation warning"""
+
+    @functools.wraps(func)
+    def log_warning(*args, **kwargs):
+        log.warning(
+            f"DEPRECATED: '{old}' is deprecated and will be removed in future releases."
+            f" Use '{new}' instead."
+        )
+        return func(*args, **kwargs)
+
+    return log_warning
 
 
 class ConverterBase(abc.ABC):
@@ -24,6 +42,21 @@ class ConverterBase(abc.ABC):
     instance: type
     representation: str
     level: int = 10
+
+    def __init_subclass__(cls, **kwargs):
+        super().__init_subclass__(**kwargs)
+
+        if hasattr(cls, "_encode"):
+            func = _depreciate_decorator(
+                getattr(cls, "_encode"), old="_encode()", new="encode()"
+            )
+            setattr(cls, "encode", func)
+        if hasattr(cls, "_decode"):
+            func = _depreciate_decorator(
+                getattr(cls, "_decode"), old="_decode()", new="decode()"
+            )
+            setattr(cls, "decode", func)
+        return cls
 
     @abc.abstractmethod
     def encode(self, obj) -> str:
