@@ -99,3 +99,9 @@ and will result in
     "value": "2022-03-11T09:47:35.280331"
 }
 ````
+
+If you don't want to register your converter to be used everywhere, simply use:
+
+```python
+json_string = json.dumps(dt, cls=znjson.ZnEncoder.from_converters(DatetimeConverter))
+```
