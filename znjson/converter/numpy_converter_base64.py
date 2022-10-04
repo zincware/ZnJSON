@@ -1,24 +1,22 @@
-import base64
-import io
+"""Use base64 encoding to ASCII for large numpy arrays"""
+import functools
 
 import numpy as np
 
-from znjson import ConverterBase
+from znjson.base import ConverterBase
 
 
 class NumpyConverter(ConverterBase):
+    """Use base64 encoding to ASCII for large numpy arrays"""
+
     instance = np.ndarray
-    representation = "np.ndarray64"
+    representation = "np.ndarray_b64"
     level = 30
 
-    def _encode(self, obj):
-        with io.BytesIO() as f:
-            np.save(f, obj)
-            f.seek(0)
-            return base64.b64encode(f.read()).decode("ascii")
+    def encode(self, obj):
+        """Encode the numpy array"""
+        return self.save_to_b64(method=functools.partial(np.save, arr=obj))
 
-    def _decode(self, value):
-        with io.BytesIO() as f:
-            f.write(base64.b64decode(value))
-            f.seek(0)
-            return np.load(f)
+    def decode(self, value):
+        """Decode the numpy array"""
+        return self.load_from_b64(value, method=np.load)

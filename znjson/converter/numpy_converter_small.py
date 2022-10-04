@@ -1,17 +1,20 @@
+"""Convert small numpy arrays to lists"""
 import numpy as np
 
-from znjson import ConverterBase
+from znjson.base import ConverterBase
 
 
-class SmallNumpyConverter(ConverterBase):
+class NumpyConverterSmall(ConverterBase):
+    """Convert small numpy arrays to lists"""
+
     instance = np.ndarray
     representation = "np.ndarray_small"
     level = 50
 
-    def _encode(self, obj):
+    def encode(self, obj):
         return obj.tolist()
 
-    def _decode(self, value):
+    def decode(self, value):
         return np.array(value)
 
     def __eq__(self, other):

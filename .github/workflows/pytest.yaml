@@ -6,8 +6,8 @@ name: pytest
 on:
   push:
   pull_request:
-  schedule:
-    - cron: '14 3 * * 1'  # at 03:14 on Monday.
+#  schedule:
+#    - cron: '14 3 * * 1'  # at 03:14 on Monday.
 
 jobs:
   build:
@@ -22,7 +22,6 @@ jobs:
           - 3.8
         os:
           - ubuntu-latest
-#          - windows-latest
 
     steps:
       - uses: actions/checkout@v2

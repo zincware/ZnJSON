@@ -77,17 +77,17 @@ class DatetimeConverter(ConverterBase):
     representation = "datetime"
     instance = datetime
 
-    def _encode(self, obj: datetime) -> str:
+    def encode(self, obj: datetime) -> str:
         """Convert the datetime object to str / isoformat"""
         return obj.isoformat()
-    def _decode(self, value: str) -> datetime:
+    def decode(self, value: str) -> datetime:
         """Create datetime object from str / isoformat"""
         return datetime.fromisoformat(value)
 ````
 
 This allows us to use this new serializer:
 ````python
-znjson.register(DatetimeConverter) # we need to register the new converter first
+znjson.config.register(DatetimeConverter) # we need to register the new converter first
 json_string = json.dumps(dt, cls=znjson.ZnEncoder, indent=4)
 json.loads(json_string, cls=znjson.ZnDecoder)
 ````
