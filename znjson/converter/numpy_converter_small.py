@@ -18,4 +18,6 @@ class NumpyConverterSmall(ConverterBase):
         return np.array(value)
 
     def __eq__(self, other):
-        return len(np.shape(other)) == 1 and len(other) < 20
+        if isinstance(other, self.instance):
+            return len(np.shape(other)) == 1 and len(other) < 20
+        return False

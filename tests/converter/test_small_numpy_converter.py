@@ -1,5 +1,6 @@
 import json
 
+import ase
 import numpy as np
 import pytest
 
@@ -24,6 +25,16 @@ def numpy_float_array():
 def test_encode(numpy_array):
     arr = json.dumps(numpy_array, cls=znjson.ZnEncoder)
     assert arr == '{"_type": "np.ndarray_small", "value": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}'
+
+
+def test_encode_obj_with_shape():
+    with pytest.raises(TypeError):
+        _ = json.dumps(
+            [ase.Atoms()],
+            cls=znjson.ZnEncoder.from_converters(
+                [znjson.converter.NumpyConverter, znjson.converter.NumpyConverterSmall]
+            ),
+        )
 
 
 def test_encode_large(numpy_array_large):

@@ -8,7 +8,7 @@ multi_line_output = 3
 
 [tool.poetry]
 name = "znjson"
-version = "0.2.1"
+version = "0.2.2"
 description = "A Python Package to Encode/Decode some common file formats to json"
 authors = ["zincwarecode <zincwarecode@gmail.com>"]
 license = "Apache-2.0"
@@ -36,6 +36,7 @@ isort = "^5.10.1"
 flake8 = "^5.0.4"
 jupyterlab = "^3.4.7"
 jsonpickle = "^2.2.0"
+ase = "^3.22.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
