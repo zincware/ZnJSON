@@ -1,4 +1,5 @@
 """ZnJSON converter parent class"""
+
 from __future__ import annotations
 
 import abc

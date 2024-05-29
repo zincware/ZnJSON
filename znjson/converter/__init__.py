@@ -1,4 +1,5 @@
 """Manage Converter Inputs based on available moduls"""
+
 from znjson.converter.class_converter import ClassConverter
 from znjson.converter.pathlib_converter import PathlibConverter
 

@@ -1,4 +1,5 @@
 """Convert small numpy arrays to lists"""
+
 import numpy as np
 
 from znjson.base import ConverterBase

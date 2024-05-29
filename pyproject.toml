@@ -1,14 +1,6 @@
-[tool.black]
-line-length = 90
-preview = true
-
-[tool.isort]
-profile = 'black'
-multi_line_output = 3
-
 [tool.poetry]
 name = "znjson"
-version = "0.2.2"
+version = "0.2.3"
 description = "A Python Package to Encode/Decode some common file formats to json"
 authors = ["zincwarecode <zincwarecode@gmail.com>"]
 license = "Apache-2.0"
@@ -19,25 +11,20 @@ readme = "README.md"
 repository = "https://github.com/zincware/ZnJSON"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 
-[tool.poetry.dev-dependencies]
-numpy = "^1.23.1"
-pandas = "^1.4.3"
-pytest = "^7.1.2"
-coverage = "^6.4.2"
-coveralls = "^3.3.1"
-pytest-xdist = "^2.5.0"
 
 [tool.poetry.group.dev.dependencies]
-pylint = "^2.15.3"
-black = "^22.8.0"
-isort = "^5.10.1"
-flake8 = "^5.0.4"
-jupyterlab = "^3.4.7"
-jsonpickle = "^2.2.0"
+numpy = "^1"
+pandas = "^2"
+pytest = "^7"
 ase = "^3.22.1"
+ruff = "^0.4.6"
+coverage = "^7"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff.lint]
+select = ["I"]

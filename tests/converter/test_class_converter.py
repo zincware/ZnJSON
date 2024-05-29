@@ -21,7 +21,9 @@ def test_encode(example_class):
 
 def test_decode(example_class):
     encoded_str = json.dumps(example_class, cls=znjson.ZnEncoder)
-    assert isinstance(json.loads(encoded_str, cls=znjson.ZnDecoder), type(example_class))
+    assert isinstance(
+        json.loads(encoded_str, cls=znjson.ZnDecoder), type(example_class)
+    )
 
 
 def test_unable_to_encode():

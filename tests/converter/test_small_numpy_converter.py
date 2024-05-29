@@ -24,7 +24,9 @@ def numpy_float_array():
 
 def test_encode(numpy_array):
     arr = json.dumps(numpy_array, cls=znjson.ZnEncoder)
-    assert arr == '{"_type": "np.ndarray_small", "value": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}'
+    assert (
+        arr == '{"_type": "np.ndarray_small", "value": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}'
+    )
 
 
 def test_encode_obj_with_shape():
