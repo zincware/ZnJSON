@@ -11,16 +11,16 @@ readme = "README.md"
 repository = "https://github.com/zincware/ZnJSON"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 
 
 [tool.poetry.group.dev.dependencies]
 numpy = "^1"
-pandas = "^1"
+pandas = "^2"
 pytest = "^7"
 ase = "^3.22.1"
 ruff = "^0.4.6"
-coverage = "^7.5.3"
+coverage = "^7"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
