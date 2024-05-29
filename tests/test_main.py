@@ -22,27 +22,39 @@ def test_decoder_serializable(simple_dict):
     assert simple_dict == json.loads(data_str, cls=znjson.ZnDecoder)
 
 
+def test_encode_pathlib():
+    data = pathlib.Path("test_path.txt")
+
+    assert json.loads(json.dumps(data, cls=znjson.ZnEncoder)) == {
+        "_type": "pathlib.Path",
+        "value": "test_path.txt",
+    }
+    assert znjson.dumps(data) == '{"_type": "pathlib.Path", "value": "test_path.txt"}'
+
+
 def test_decode_pathlib():
     data_str = '{"_type": "pathlib.Path", "value": "test_path.txt"}'
 
     assert json.loads(data_str, cls=znjson.ZnDecoder) == pathlib.Path("test_path.txt")
+    assert znjson.loads(data_str) == pathlib.Path("test_path.txt")
 
 
 def test_decode_pathlib_wo__type():
     data_str = '{"value": "test_path.txt"}'
 
     assert json.loads(data_str, cls=znjson.ZnDecoder) == {"value": "test_path.txt"}
+    assert znjson.loads(data_str) == {"value": "test_path.txt"}
 
 
 def test_decode_pathlib_wo_value():
     data_str = '{"_type": "pathlib.Path"}'
 
     assert json.loads(data_str, cls=znjson.ZnDecoder) == {"_type": "pathlib.Path"}
+    assert znjson.loads(data_str) == {"_type": "pathlib.Path"}
 
 
 def test_not_encodeable():
-    def function():
-        ...
+    def function(): ...
 
     with pytest.raises(TypeError):
         json.dumps(function, cls=znjson.ZnEncoder)
@@ -62,7 +74,9 @@ def test_from_converter(enable):
     if enable:
         encoded_str = json.dumps(
             data,
-            cls=znjson.ZnEncoder.from_converters([znjson.converter.NumpyConverterSmall]),
+            cls=znjson.ZnEncoder.from_converters(
+                [znjson.converter.NumpyConverterSmall]
+            ),
         )
         assert json.loads(encoded_str)["_type"] == "np.ndarray_small"
     else:
@@ -70,7 +84,9 @@ def test_from_converter(enable):
             # only can encode pathlib
             _ = json.dumps(
                 data,
-                cls=znjson.ZnEncoder.from_converters([znjson.converter.PathlibConverter]),
+                cls=znjson.ZnEncoder.from_converters(
+                    [znjson.converter.PathlibConverter]
+                ),
             )
 
 

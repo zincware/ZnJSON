@@ -1,8 +1,22 @@
 """ZnJSON main Encoder / Decoder classes to use with the default json library"""
+
+import functools
 import json
 from typing import Any
 
 from znjson.config import config
+
+
+@functools.wraps(json.loads)
+def loads(data: str, cls=None, **kwargs):
+    """Load a string with ZnJSON decoding"""
+    return json.loads(data, cls=cls or ZnDecoder, **kwargs)
+
+
+@functools.wraps(json.dumps)
+def dumps(data: Any, cls=None, **kwargs) -> str:
+    """Dump data with ZnJSON encoding"""
+    return json.dumps(data, cls=cls or ZnEncoder, **kwargs)
 
 
 class SelectConverters:

@@ -1,4 +1,5 @@
 """Use base64 encoding to ASCII for large numpy arrays"""
+
 import functools
 
 import numpy as np

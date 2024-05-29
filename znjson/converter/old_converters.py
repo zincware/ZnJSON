@@ -1,5 +1,6 @@
 """Converters that should not be used anymore but are
- still available for backwards compatibility."""
+still available for backwards compatibility."""
+
 import io
 
 import numpy as np

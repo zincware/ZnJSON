@@ -1,4 +1,5 @@
 """Use pickle to serialize arbitrary classes"""
+
 import functools
 import importlib
 import pickle
