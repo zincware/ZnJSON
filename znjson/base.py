@@ -146,7 +146,7 @@ class ConverterBase(abc.ABC):
 
     @staticmethod
     def load_from_b64(value, method):
-        """Convert a string from memory into something that can be read e.g. by np.load"""
+        """Convert a string from memory such that it can be read e.g. by np.load"""
         with io.BytesIO() as file:
             file.write(base64.b64decode(value))
             file.seek(0)
