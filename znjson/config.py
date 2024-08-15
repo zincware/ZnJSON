@@ -33,9 +33,13 @@ class Config:
 
     def register(
         self,
-        obj: Optional[Union[
-            List[Type[ConverterBase]], Tuple[Type[ConverterBase]], Type[ConverterBase]
-        ]] = None,
+        obj: Optional[
+            Union[
+                List[Type[ConverterBase]],
+                Tuple[Type[ConverterBase]],
+                Type[ConverterBase],
+            ]
+        ] = None,
     ):
         """register converters to be used with zn.En/DeCoder
 

@@ -22,6 +22,7 @@ def test_encode_plotly(plotly_figure):
     assert fig.layout.xaxis.title.text == "sepal_width"
     assert fig.layout.yaxis.title.text == "sepal_length"
 
+
 def test_encode_list_plotly(plotly_figure):
     import znjson
 
