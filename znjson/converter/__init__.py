@@ -1,8 +1,9 @@
 """Manage Converter Inputs based on available moduls"""
 
+import contextlib
+
 from znjson.converter.class_converter import ClassConverter
 from znjson.converter.pathlib_converter import PathlibConverter
-import contextlib
 
 __all__ = ["PathlibConverter", "ClassConverter"]
 
