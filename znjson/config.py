@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass, field
-from typing import List, Tuple, Type, Union, Optional
+from typing import List, Optional, Tuple, Type, Union
 
 from znjson import converter
 from znjson.base import ConverterBase

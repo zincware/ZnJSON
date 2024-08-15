@@ -1,7 +1,7 @@
-from znjson.base import ConverterBase
-
 import plotly.graph_objs
 import plotly.io as pio
+
+from znjson.base import ConverterBase
 
 
 class PlotlyConverter(ConverterBase):
@@ -11,6 +11,6 @@ class PlotlyConverter(ConverterBase):
 
     def encode(self, obj):
         return obj.to_json()
-    
+
     def decode(self, value):
         return pio.from_json(value)

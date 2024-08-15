@@ -1,6 +1,5 @@
-import pytest
-
 import plotly.express as px
+import pytest
 from plotly.graph_objs import Figure
 
 
