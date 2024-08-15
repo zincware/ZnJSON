@@ -21,3 +21,10 @@ try:
     ]
 except ModuleNotFoundError:
     pass
+
+try:
+    from znjson.converter.plotly_converter import PlotlyConverter
+
+    __all__ += ["PlotlyConverter"]
+except ModuleNotFoundError:
+    pass
