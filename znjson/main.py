@@ -32,7 +32,7 @@ class SelectConverters:
         ----------
         converter: converter|list of converters to use
         add_default: bool, default False
-            In addition to the converter argument use the config.ACTIVE_CONVERTER as well
+            In addition to the converter argument use the config.ACTIVE_CONVERTER
 
         Returns
         -------

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass, field
-from typing import List, Tuple, Type, Union
+from typing import List, Optional, Tuple, Type, Union
 
 from znjson import converter
 from znjson.base import ConverterBase
@@ -33,8 +33,12 @@ class Config:
 
     def register(
         self,
-        obj: Union[
-            List[Type[ConverterBase]], Tuple[Type[ConverterBase]], Type[ConverterBase]
+        obj: Optional[
+            Union[
+                List[Type[ConverterBase]],
+                Tuple[Type[ConverterBase]],
+                Type[ConverterBase],
+            ]
         ] = None,
     ):
         """register converters to be used with zn.En/DeCoder
