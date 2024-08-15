@@ -2,10 +2,11 @@
 
 from znjson.converter.class_converter import ClassConverter
 from znjson.converter.pathlib_converter import PathlibConverter
+import contextlib
 
 __all__ = ["PathlibConverter", "ClassConverter"]
 
-try:
+with contextlib.suppress(ModuleNotFoundError):
     from znjson.converter.numpy_converter_base64 import NumpyConverter
     from znjson.converter.numpy_converter_small import NumpyConverterSmall
     from znjson.converter.old_converters import (
@@ -19,12 +20,9 @@ try:
         "NumpyConverterBase64",
         "NumpyConverterLatin1",
     ]
-except ModuleNotFoundError:
-    pass
 
-try:
+
+with contextlib.suppress(ModuleNotFoundError):
     from znjson.converter.plotly_converter import PlotlyConverter
 
     __all__ += ["PlotlyConverter"]
-except ModuleNotFoundError:
-    pass
