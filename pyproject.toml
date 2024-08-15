@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "znjson"
-version = "0.2.4"
+version = "0.2.5"
 description = "A Python Package to Encode/Decode some common file formats to json"
 authors = ["zincwarecode <zincwarecode@gmail.com>"]
 license = "Apache-2.0"
@@ -18,10 +18,10 @@ python = "^3.9"
 numpy = "^1"
 pandas = "^2"
 pytest = "^7"
-ase = "^3.22.1"
+ase = "^3.22"
 ruff = "^0.4.6"
 coverage = "^7"
-plotly = "^5.23.0"
+plotly = "^5.23"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
