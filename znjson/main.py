@@ -4,9 +4,8 @@ import functools
 import json
 from typing import Any, List, Union
 
-from znjson.config import config
 from znjson.base import ConverterBase
-
+from znjson.config import config
 
 CONVERTER_TYPE = Union[ConverterBase, List[ConverterBase], None]
 
