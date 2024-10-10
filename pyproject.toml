@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "znjson"
-version = "0.2.6"
+version = "0.2.5"
 description = "A Python Package to Encode/Decode some common file formats to json"
 authors = ["zincwarecode <zincwarecode@gmail.com>"]
 license = "Apache-2.0"
