@@ -2,14 +2,17 @@
 
 import functools
 import json
-from typing import Any
+from typing import Any, List, Union
 
 from znjson.config import config
 from znjson.base import ConverterBase
 
 
+CONVERTER_TYPE = Union[ConverterBase, List[ConverterBase], None]
+
+
 @functools.wraps(json.loads)
-def loads(data: str, converter:list[ConverterBase]|ConverterBase|None = None, **kwargs):
+def loads(data: str, converter:CONVERTER_TYPE = None, **kwargs):
     """Load a string with ZnJSON decoding"""
     if converter is None:
         converter = config.ACTIVE_CONVERTER
@@ -17,7 +20,7 @@ def loads(data: str, converter:list[ConverterBase]|ConverterBase|None = None, **
 
 
 @functools.wraps(json.dumps)
-def dumps(data: Any, converter:list[ConverterBase]|ConverterBase|None = None, **kwargs) -> str:
+def dumps(data: Any, converter:CONVERTER_TYPE = None, **kwargs) -> str:
     """Dump data with ZnJSON encoding"""
     if converter is None:
         converter = config.ACTIVE_CONVERTER
