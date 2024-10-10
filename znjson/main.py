@@ -5,18 +5,23 @@ import json
 from typing import Any
 
 from znjson.config import config
+from znjson.base import ConverterBase
 
 
 @functools.wraps(json.loads)
-def loads(data: str, cls=None, **kwargs):
+def loads(data: str, converter:list[ConverterBase]|ConverterBase|None = None, **kwargs):
     """Load a string with ZnJSON decoding"""
-    return json.loads(data, cls=cls or ZnDecoder, **kwargs)
+    if converter is None:
+        converter = config.ACTIVE_CONVERTER
+    return json.loads(data, cls=ZnDecoder.from_converters(converter), **kwargs)
 
 
 @functools.wraps(json.dumps)
-def dumps(data: Any, cls=None, **kwargs) -> str:
+def dumps(data: Any, converter:list[ConverterBase]|ConverterBase|None = None, **kwargs) -> str:
     """Dump data with ZnJSON encoding"""
-    return json.dumps(data, cls=cls or ZnEncoder, **kwargs)
+    if converter is None:
+        converter = config.ACTIVE_CONVERTER
+    return json.dumps(data, cls=ZnEncoder.from_converters(converter), **kwargs)
 
 
 class SelectConverters:
