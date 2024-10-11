@@ -2,7 +2,7 @@
 
 import functools
 import json
-from typing import Any, List, Union, Type
+from typing import Any, List, Type, Union
 
 from znjson.base import ConverterBase
 from znjson.config import config
