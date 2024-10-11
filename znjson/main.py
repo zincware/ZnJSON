@@ -2,28 +2,36 @@
 
 import functools
 import json
-from typing import Any, List, Union
+from typing import Any, List, Union, Type
 
 from znjson.base import ConverterBase
 from znjson.config import config
 
-CONVERTER_TYPE = Union[ConverterBase, List[ConverterBase], None]
+CONVERTER_TYPE = Union[Type[ConverterBase], List[Type[ConverterBase]], None]
 
 
 @functools.wraps(json.loads)
-def loads(data: str, converter: CONVERTER_TYPE = None, **kwargs):
+def loads(data: str, converter: CONVERTER_TYPE = None, cls=None, **kwargs):
     """Load a string with ZnJSON decoding"""
+    if converter is not None and cls is not None:
+        raise TypeError("Cannot specify both `converter` and `cls`")
     if converter is None:
         converter = config.ACTIVE_CONVERTER
-    return json.loads(data, cls=ZnDecoder.from_converters(converter), **kwargs)
+    if cls is None:
+        cls = ZnDecoder.from_converters(converter)
+    return json.loads(data, cls=cls, **kwargs)
 
 
 @functools.wraps(json.dumps)
-def dumps(data: Any, converter: CONVERTER_TYPE = None, **kwargs) -> str:
+def dumps(data: Any, converter: CONVERTER_TYPE = None, cls=None, **kwargs) -> str:
     """Dump data with ZnJSON encoding"""
+    if converter is not None and cls is not None:
+        raise TypeError("Cannot specify both `converter` and `cls`")
     if converter is None:
         converter = config.ACTIVE_CONVERTER
-    return json.dumps(data, cls=ZnEncoder.from_converters(converter), **kwargs)
+    if cls is None:
+        cls = ZnEncoder.from_converters(converter)
+    return json.dumps(data, cls=cls, **kwargs)
 
 
 class SelectConverters:
